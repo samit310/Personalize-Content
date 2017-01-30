@@ -14,6 +14,7 @@ How to configure:
 1: Add a Country field [List(text)] to content type with following country code values
 
    JP|Japan
+   
    IN|India
 
 2: Figure out all Views where the Personalize content feature is required.
