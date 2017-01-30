@@ -1,10 +1,11 @@
 # Personalize-Content [Drupal 8]
 
-Purpose: Personalize site content based on user IP Address.
+Purpose: 
+
+Personalize site content based on user IP Address.
 
 Requirement:
 
- 
 Geoip [https://www.drupal.org/project/geoip]
 
 Address [https://www.drupal.org/project/address]
@@ -27,7 +28,11 @@ How to configure:
 
 6: Add GeoLite2-City.mmdb file inside sites/default/files Directory. 
 
-Concerns: We have to disable Drupal page cache programmatically to Personalize site content based on user IP Address.
+Concerns: 
+
+We have to disable Drupal page cache programmatically to Personalize site content based on user IP Address.
 [Check personalization_algo/src/EventSubscriber/PageViewEvent.php file]
 
-Future enhancement: We can add Logged-in user condition inside PageViewEvent.php file, Because the issue of Drupal page cache occur with Anonymous User. 
+Future enhancement:
+
+We can add Logged-in user condition inside PageViewEvent.php file, Because the issue of Drupal page cache occur with Anonymous User. 
