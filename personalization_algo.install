@@ -1,0 +1,82 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function personalization_algo_schema() {
+  $schema['personalization_algo'] = array(
+    'description' => 'Store user IP for personalization.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'Primary key of personalization.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'user_ip' => array(
+        'description' => 'User IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'country_name' => array(
+        'description' => 'Country name based on IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'iso_code' => array(
+        'description' => 'iso code based on IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'city_name' => array(
+        'description' => 'City name based on IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'postal_code' => array(
+        'description' => 'Postal code based on IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'latitude' => array(
+        'description' => 'Latitude based on IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'longitude' => array(
+        'description' => 'Longitude code based on IP address.',
+        'type' => 'varchar_ascii',
+        'length' => 255,
+        'null' => TRUE,
+        'default' => '',
+      ),
+      'created' => array(
+        'description' => 'Created date of personalization.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'updated' => array(
+        'description' => 'Updated date of personalization.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}

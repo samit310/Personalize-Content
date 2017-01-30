@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * @file
+ * Contains personalization_algo.module.
+ */
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\views\ViewExecutable;
+use Drupal\views\Plugin\views\query\QueryPluginBase;
+
+/**
+ * Implements hook_help().
+ */
+function personalization_algo_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the personalization_algo module.
+    case 'help.page.personalization_algo':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Personalization algo to Personalize visitors content') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_views_query_alter().
+ */
+function personalization_algo_views_query_alter(ViewExecutable $view, QueryPluginBase $query) {
+//  if ($view->id() == 'personalization_content') {
+    $client_ip_data = &drupal_static('personalization_algo.client_ip');
+    if (empty($client_ip_data)) {
+      $client_ip = \Drupal::service('personalization_algo.client_ip');
+      $client_ip_data = $client_ip->getClientData();
+    }
+    // Traverse through the 'where' part of the query.
+    foreach ($query->where as &$condition_group) {
+      foreach ($condition_group['conditions'] as $group_key => &$condition) {
+        // If this is the part of the query filtering on title, chang the
+        // condition to filter on Country Value.
+        if (preg_match("/node__field_country.field_country_value = :node__field_country_field_country_value/", $condition['field'])) {
+          if (!empty($client_ip_data)) {
+            $condition = [
+              'field' => 'node__field_country.field_country_value',
+              'value' => $client_ip_data['iso_code'],
+              'operator' => '=',
+            ];
+            $view->addCacheContext('personalizecountry');
+            break;
+          }
+          else {
+            //unset($condition_group['conditions'][$group_key]);
+            break;
+          }
+        }
+      }
+    }
+//  }
+}

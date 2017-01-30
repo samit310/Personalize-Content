@@ -1,0 +1,7 @@
+name: Personalization algo
+type: module
+description: Personalization algo to Personalize visitors content
+core: 8.x
+package: Custom
+dependencies:
+  - geoip

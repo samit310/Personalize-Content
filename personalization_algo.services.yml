@@ -1,0 +1,14 @@
+services:
+  personalization_algo.page_view_event:
+    class: Drupal\personalization_algo\EventSubscriber\PageViewEvent
+    arguments: []
+    tags:
+      - { name: event_subscriber }
+  personalization_algo.client_ip:
+    class: Drupal\personalization_algo\PersonalizeClientIp
+    arguments: ['@stream_wrapper_manager', '@request_stack']
+  cache_context.personalizecountry:
+    class: Drupal\personalization_algo\Cache\Context\PersonalizeCountryCacheContext
+    arguments: ['@personalization_algo.client_ip']
+    tags:
+      - { name: cache.context}    
