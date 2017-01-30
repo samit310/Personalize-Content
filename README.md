@@ -2,8 +2,11 @@
 
 Purpose: Personalize site content based on user IP Address.
 
-Requirement: 
+Requirement:
+
+ 
 Geoip [https://www.drupal.org/project/geoip]
+
 Address [https://www.drupal.org/project/address]
 
 How to configure:
